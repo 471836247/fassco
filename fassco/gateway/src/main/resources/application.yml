@@ -1,0 +1,46 @@
+server:
+  port: 8084
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: oder-routes
+          uri: lb://oder
+          predicates:
+            - Path=/odercontroller/**
+          filters:
+            - StripPrefix=1
+        - id: user-routes
+          uri: lb://user
+          predicates:
+            - Path=/usercontroller/**
+          filters:
+            - StripPrefix=1
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}:${spring.application.name}
+    prefer-ip-address: true
+    #租期更新时间
+    lease-renewal-interval-in-seconds: 1
+    #租期到期时间
+    lease-expiration-duration-in-seconds: 1
+
+  client:
+    healthcheck:
+      enabled: true
+    #不会向注册中心注册自己
+    register-with-eureka: true
+    #抓取注册实例
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8082//eureka
+
+
+

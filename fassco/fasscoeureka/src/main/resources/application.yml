@@ -1,0 +1,20 @@
+server:
+  port: 8082
+spring:
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  instance:
+    hostname: localhost12
+  server:
+    #关闭注册中心自我保护机制
+    enable-self-preservation: false
+    #注册中心清理间隔 单位毫秒
+    eviction-interval-timer-in-ms: 1000
+  client:
+    #不会向注册中心注册自己
+    register-with-eureka: false
+    #维护注册实例，不需要检索服务
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka

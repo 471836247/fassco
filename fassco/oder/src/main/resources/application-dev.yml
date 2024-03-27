@@ -1,0 +1,27 @@
+server:
+  port: 8081
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: oder
+  profiles:
+    active: @profile.active@
+eureka:
+  instance:
+    instance-id: oder123
+    prefer-ip-address: true
+    #租期更新时间
+    lease-renewal-interval-in-seconds: 1
+    #租期到期时间
+    lease-expiration-duration-in-seconds: 1
+
+  client:
+    healthcheck:
+      enabled: true
+    #不会向注册中心注册自己
+    register-with-eureka: true
+    #抓取注册实例
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8082//eureka

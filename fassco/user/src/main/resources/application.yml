@@ -1,0 +1,51 @@
+server:
+  port: 8083
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: user
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}:${spring.application.name}
+    prefer-ip-address: true
+    #租期更新时间
+    lease-renewal-interval-in-seconds: 1
+    #租期到期时间
+    lease-expiration-duration-in-seconds: 1
+
+  client:
+    healthcheck:
+      enabled: true
+    #不会向注册中心注册自己
+    register-with-eureka: true
+    #抓取注册实例
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8082//eureka
+feign:
+  circuitbreaker:
+    enabled: true
+  httpclient:
+    enabled: true
+    max-connections: 200
+    max-connections-per-route: 50
+  client:
+      defalut: #被加载的默认的feign配置
+        connectTimeOut: 5000
+        readTimeOut: 5000
+        loggerLevel: FULL
+logging:
+  level:
+    root: info
+
+
+
+
+

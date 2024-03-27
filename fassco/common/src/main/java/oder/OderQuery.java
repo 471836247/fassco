@@ -12,8 +12,6 @@ public class OderQuery implements Serializable {
 
     @ApiModelProperty(value = "id用户名",required=true)
     private String id;
-
-
     @ApiModelProperty(value = "dddd用户名",required=true)
     private String dddd;
 }

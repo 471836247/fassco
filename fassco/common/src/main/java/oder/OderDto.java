@@ -10,6 +10,7 @@ import java.io.Serializable;
 @ApiModel(description = "响应返回数据对象")
 public class OderDto implements Serializable {
 
+
     @ApiModelProperty(value = "id用户名",required=true)
     private String id;
 }
